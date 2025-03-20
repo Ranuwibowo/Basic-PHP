@@ -28,12 +28,18 @@
 <?php  
 include "service/database.php";
 
-if(isset($_POST['register'])){
-  $username= $_POST['nama'];  
-  $password= $_POST['password'];
+if(isset($_POST["register"])){
+  $username= $_POST["username"];  
+  $password= $_POST["password"];
   
-  $sql = "INSERT INTO user (nama, password) VALUES ('$username', '$password')";
+  $sql = "INSERT INTO users (username,password) VALUES ('$username', '$password')";
+  $db->query($sql);
 
+  // if($db->query($sql)){
+  //   echo "Berhasil";
+  // }else{
+  //   echo "Gagal";
+  // }
 }
 ?>
 
@@ -41,9 +47,9 @@ if(isset($_POST['register'])){
     <?php include "layout/header.html"?>
   <h2 style="text-align:center">Daftar Akun</h2>
     <form action="register.php" method="POST">
-      <input type="text" name="nama" placeholder="Masukkan Nama">
-      <input type="password" name="Password" placeholder="Masukan Password">
-      <button type="submit" name="register">Langsung gas</button>
+      <input type="text" name="username" placeholder="Masukkan Nama">
+      <input type="password" name="password" placeholder="Masukan Password">
+      <button type="submit" name="register">Daftar Akun</button>
     </form>
     <?php include "layout/footer.html"?>
   </body>
