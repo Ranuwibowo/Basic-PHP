@@ -29,19 +29,19 @@
 include "service/database.php";
 
 if(isset($_POST["register"])){
-  $username= $_POST["username"];  
-  $password= $_POST["password"];
-  
-  $sql = "INSERT INTO users (username,password) VALUES ('$username', '$password')";
-  $db->query($sql);
+  $username = $_POST["username"];  
+  $password = $_POST["password"];
 
-  // if($db->query($sql)){
-  //   echo "Berhasil";
-  // }else{
-  //   echo "Gagal";
-  // }
+  $sql = "INSERT INTO users (username, password) VALUES ('$username', '$password')";
+  
+  if($db->query($sql)){
+    echo "Selamat Anda sudah mendaftar";
+  } else {
+    echo "Error: " . $sql . "<br>" . $db->error;
+  }
 }
 ?>
+
 
   <body>
     <?php include "layout/header.html"?>
