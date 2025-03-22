@@ -29,6 +29,10 @@
 <?php
   include "service/database.php";
 
+  session_start();
+
+    $login_massage = "";
+
   if (isset($_POST['login'])){
     $username = $_POST['username'];
     $password = $_POST['password'];
@@ -38,9 +42,11 @@
     $result = $db->query($sql);
 
     if($result->num_rows> 0){
-      echo "lu udah ada akan akun";
+      $data= $result->fetch_assoc();
+      $_SESSION['username'] = $data['username'];
+       header("Location: dasboard.php");
     } else {
-      echo "Username atau Password Salah";
+      $login_massage = "Login Gagal";
     }
   }
 
@@ -49,9 +55,10 @@
   <body>
     <?php include "layout/header.html"?>
   <h2 style="text-align:center">Login</h2>
+    <i><? $login_massage ?></i>
     <form  action="login.php" method="POST">
-      <input type="text" name="nama" placeholder="Masukkan Nama">
-      <input type="password" name="Password" placeholder="Masukan Password">
+      <input type="text" name="username" placeholder="Masukkan Nama">
+      <input type="password" name="password" placeholder="Masukan Password">
       <button type="submit" name="login">Langsung gas</button>
     </form>
     <?php include "layout/footer.html"?>

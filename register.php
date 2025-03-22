@@ -1,4 +1,4 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
   <html lang="en">
   <head>
     <meta charset="UTF-8">
@@ -23,10 +23,15 @@
       color: white;
       border: none;
     }
+    .p{
+      text-align: center;
+      color: black;
+    }
   </style>
 
 <?php  
 include "service/database.php";
+$register_massage = "";
 
 if(isset($_POST["register"])){
   $username = $_POST["username"];  
@@ -35,9 +40,9 @@ if(isset($_POST["register"])){
   $sql = "INSERT INTO users (username, password) VALUES ('$username', '$password')";
   
   if($db->query($sql)){
-    echo "Selamat Anda sudah mendaftar";
+    $register_massage = "Register Berhasil";
   } else {
-    echo "Error: " . $sql . "<br>" . $db->error;
+   $register_massage = "Register Gagal";
   }
 }
 ?>
@@ -46,6 +51,7 @@ if(isset($_POST["register"])){
   <body>
     <?php include "layout/header.html"?>
   <h2 style="text-align:center">Daftar Akun</h2>
+    <p class="p"><i><?php echo $register_massage; ?></i></p>
     <form action="register.php" method="POST">
       <input type="text" name="username" placeholder="Masukkan Nama">
       <input type="password" name="password" placeholder="Masukan Password">
